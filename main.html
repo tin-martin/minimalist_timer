@@ -2,7 +2,6 @@
 <link rel="stylesheet" href="mystyle.css">
 <html>
 <head>
-
 <style>
 #timerDisplay {
   text-align: center;
@@ -20,7 +19,8 @@
   font-family: 'Courier New', monospace;
   font-style:"bold";
   display: block;
-  margin: auto; 
+  margin: auto;
+  
 }
 #canvas{
     display:block;
@@ -31,13 +31,13 @@
 }
 </style>
 </head>
-<body style="background-color:"antiquewhite">
+<body style="background-color:antiquewhite"> 
 <p id="timerDisplay"></p>
 <canvas id="canvas" width="250",length="250"></canvas>
-<button class="button" onclick="start_end()">Click</button>
+<button class="button" onclick="start_pause()">Start/Pause</button>
+<button class="button" onclick="restart()">Restart</button>
 <script>
     var duration = 60*prompt("Enter time: (in minutes)")*100;
-    console.log(duration);
     var start = false;
     var time = duration;
     var formatedTime = "";
@@ -49,18 +49,20 @@
     
     function format(time){
         //1s = 10m
-        var displayedHours a= Math.floor((duration/100)/60/60);
+        console.log(time);
+        var displayedHours = Math.floor((time/100)/60/60);
      
-        var displayedMinutes = Math.floor(((time/100)-displayedHours*60*60)/60)
-        console.log(displayedMinutes);
+        var displayedMinutes = Math.floor(((time/100)-displayedHours*60*60)/60);
+   
         var displayedSeconds = Math.floor(time-displayedMinutes*60*100-displayedHours*60*60*100);
-        displayedSeconds = Math.ceil(displayedSeconds/100);
+        displayedSeconds = Math.floor(displayedSeconds/100);
         
         return displayedHours.toString()+":"+displayedMinutes.toString()+":"+displayedSeconds.toString();
     }
+
     var endAngle = 1.5;
     var range = 1.5 +0.5;
-    var x=0;
+ 
     document.getElementById("timerDisplay").innerHTML = format(time);
     function timer(){
         if (time == 0){
@@ -79,15 +81,25 @@
             ctx.stroke();
      
         }
-    //clearInterval     
+    //clearInterval            
     }
-    function start_end(){
+
+    var x;
+    function start_pause(){
         pause = !pause;
         if(!start){
             start = true;
-            setInterval(timer,10); 
+            x = setInterval(timer,100); 
         }  
     }
+    function restart(){
+        clearInterval(globalThis.x);
+        globalThis.duration = 60*prompt("Enter time: (in minutes)")*100;
+        globalThis.time = globalThis.duration;
+        start = false;
+        pause = true;
+        start_pause();
+    }  
 </script>
 </body>
 </html>
