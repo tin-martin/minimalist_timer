@@ -11,8 +11,6 @@
   font-family: 'Courier New', monospace;
   
 }
-
-
 .button {
     background-color:black; 
   border: none;
@@ -22,10 +20,8 @@
   font-family: 'Courier New', monospace;
   font-style:"bold";
   display: block;
-  margin: auto;
-  
+  margin: auto; 
 }
-
 #canvas{
     display:block;
     margin:auto;
@@ -33,20 +29,14 @@
     stroke-width:5px;
     margin-bottom: 20px;
 }
-
 </style>
 </head>
 <body style="background-color:"antiquewhite">
-    
-
 <p id="timerDisplay"></p>
 <canvas id="canvas" width="250",length="250"></canvas>
 <button class="button" onclick="start_end()">Click</button>
-
 <script>
     var duration = 60*prompt("Enter time: (in minutes)")*100;
-     
-
     console.log(duration);
     var start = false;
     var time = duration;
@@ -68,7 +58,6 @@
         
         return displayedHours.toString()+":"+displayedMinutes.toString()+":"+displayedSeconds.toString();
     }
-
     var endAngle = 1.5;
     var range = 1.5 +0.5;
     var x=0;
@@ -90,10 +79,7 @@
             ctx.stroke();
      
         }
-    //clearInterval
-   
-        
-                  
+    //clearInterval     
     }
     function start_end(){
         pause = !pause;
@@ -102,14 +88,6 @@
             setInterval(timer,10); 
         }  
     }
-
-
-
-
-
-   
-    
 </script>
-
 </body>
 </html>
