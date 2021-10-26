@@ -31,7 +31,7 @@
 }
 </style>
 </head>
-<body style="background-color:antiquewhite"> 
+<body style="background-color:antiquewhite">
 <p id="timerDisplay"></p>
 <canvas id="canvas" width="250",length="250"></canvas>
 <button class="button" onclick="start_pause()">Start/Pause</button>
@@ -45,11 +45,9 @@
     var X = (250/2);
     var Y = (250/2)-70;
     var c = document.getElementById("canvas");
-    var ctx = c.getContext("2d");
-    
+    var ctx = c.getContext("2d");   
     function format(time){
         //1s = 10m
-        console.log(time);
         var displayedHours = Math.floor((time/100)/60/60);
      
         var displayedMinutes = Math.floor(((time/100)-displayedHours*60*60)/60);
@@ -59,10 +57,8 @@
         
         return displayedHours.toString()+":"+displayedMinutes.toString()+":"+displayedSeconds.toString();
     }
-
     var endAngle = 1.5;
     var range = 1.5 +0.5;
- 
     document.getElementById("timerDisplay").innerHTML = format(time);
     function timer(){
         if (time == 0){
@@ -83,13 +79,12 @@
         }
     //clearInterval            
     }
-
     var x;
     function start_pause(){
         pause = !pause;
         if(!start){
             start = true;
-            x = setInterval(timer,100); 
+            x = setInterval(timer,10); 
         }  
     }
     function restart(){
@@ -99,7 +94,7 @@
         start = false;
         pause = true;
         start_pause();
-    }  
+    }
 </script>
 </body>
 </html>
