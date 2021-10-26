@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<link rel="stylesheet" href="mystyle.css">
+<html>
+<head>
+
+<style>
+#timerDisplay {
+  text-align: center;
+  font-size: 60px;
+  margin-top: 0px;
+  font-family: 'Courier New', monospace;
+  
+}
+
+
+.button {
+    background-color:black; 
+  border: none;
+  color:white;
+  padding: 25px 100px;
+  font-size: 15px;
+  font-family: 'Courier New', monospace;
+  font-style:"bold";
+  display: block;
+  margin: auto;
+  
+}
+
+#canvas{
+    display:block;
+    margin:auto;
+    stroke:black;
+    stroke-width:5px;
+    margin-bottom: 20px;
+}
+
+</style>
+</head>
+<body style="background-color:"antiquewhite">
+    
+
+<p id="timerDisplay"></p>
+<canvas id="canvas" width="250",length="250"></canvas>
+<button class="button" onclick="start_end()">Click</button>
+
+<script>
+    var duration = 60*prompt("Enter time: (in minutes)")*100;
+     
+
+    console.log(duration);
+    var start = false;
+    var time = duration;
+    var formatedTime = "";
+    var pause = true;
+    var X = (250/2);
+    var Y = (250/2)-70;
+    var c = document.getElementById("canvas");
+    var ctx = c.getContext("2d");
+    
+    function format(time){
+        //1s = 10m
+        var displayedHours a= Math.floor((duration/100)/60/60);
+     
+        var displayedMinutes = Math.floor(((time/100)-displayedHours*60*60)/60)
+        console.log(displayedMinutes);
+        var displayedSeconds = Math.floor(time-displayedMinutes*60*100-displayedHours*60*60*100);
+        displayedSeconds = Math.ceil(displayedSeconds/100);
+        
+        return displayedHours.toString()+":"+displayedMinutes.toString()+":"+displayedSeconds.toString();
+    }
+
+    var endAngle = 1.5;
+    var range = 1.5 +0.5;
+    var x=0;
+    document.getElementById("timerDisplay").innerHTML = format(time);
+    function timer(){
+        if (time == 0){
+            pause = true;
+        }
+        if(!pause){
+            time--;
+            document.getElementById("timerDisplay").innerHTML = format(time); 
+
+            endAngle += (range/duration);
+        //    ctx.clearRect(0,0,canvas.width,canvas.height); 
+            ctx.beginPath();
+            ctx.arc(X, Y,50,1.5*Math.PI,endAngle*Math.PI,false);
+            ctx.lineWidth = 5;
+            ctx.strokeStyle = "black";
+            ctx.stroke();
+     
+        }
+    //clearInterval
+   
+        
+                  
+    }
+    function start_end(){
+        pause = !pause;
+        if(!start){
+            start = true;
+            setInterval(timer,10); 
+        }  
+    }
+
+
+
+
+
+   
+    
+</script>
+
+</body>
+</html>
