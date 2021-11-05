@@ -34,7 +34,7 @@
 <body style="background-color:antiquewhite">
 <p id="timerDisplay"></p>
 <canvas id="canvas" width="250",length="250"></canvas>
-<button class="button" onclick="start_pause()">Start/Pause</button>
+<button class="button" onclick="start_pause(false)">Start/Pause</button>
 <button class="button" onclick="restart()">Restart</button>
 <script>
     var duration = 60*prompt("Enter time: (in minutes)")*100;
@@ -80,12 +80,21 @@
     //clearInterval            
     }
     var x;
-    function start_pause(){
-        pause = !pause;
-        if(!start){
-            start = true;
-            x = setInterval(timer,10); 
-        }  
+    function start_pause(restart){
+        endAngle = 1.5;
+        range = 1.5 +0.5;
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        if(restart==true){
+            document.getElementById("timerDisplay").innerHTML = format(time); 
+
+        }else{
+            pause = !pause;
+            if(!start){
+                start = true;
+                x = setInterval(timer,10); 
+            } 
+        }
+         
     }
     function restart(){
         clearInterval(globalThis.x);
@@ -93,7 +102,7 @@
         globalThis.time = globalThis.duration;
         start = false;
         pause = true;
-        start_pause();
+        start_pause(true);
     }
 </script>
 </body>
