@@ -59,40 +59,48 @@
     }
     var endAngle = 1.5;
     var range = 1.5 +0.5;
+
     document.getElementById("timerDisplay").innerHTML = format(time);
+
+
     function timer(){
         if (time == 0){
             pause = true;
         }
         if(!pause){
+            
+            
             time--;
             document.getElementById("timerDisplay").innerHTML = format(time); 
-
-            endAngle += (range/duration);
-        //    ctx.clearRect(0,0,canvas.width,canvas.height); 
+            
+            endAngle += (range/duration);   /////////////////////asdfadsfdsfdsfdsfadsfadfas
+            
             ctx.beginPath();
             ctx.arc(X, Y,50,1.5*Math.PI,endAngle*Math.PI,false);
             ctx.lineWidth = 5;
             ctx.strokeStyle = "black";
             ctx.stroke();
-     
-        }
-    //clearInterval            
+            
+        }      
     }
     var x;
     function start_pause(restart){
         endAngle = 1.5;
         range = 1.5 +0.5;
-        ctx.clearRect(0,0,canvas.width,canvas.height);
+        
         if(restart==true){
             document.getElementById("timerDisplay").innerHTML = format(time); 
+            ctx.clearRect(0,0,canvas.width,canvas.height);
 
         }else{
             pause = !pause;
             if(!start){
                 start = true;
                 x = setInterval(timer,10); 
-            } 
+                
+            }else{
+                console.log("SDFS")
+            }
         }
          
     }
